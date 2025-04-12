@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.devstack.pos.controller.LoginFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="511.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.LoginFormController">
+   <children>
+      <Text layoutX="220.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Robotikka" textAlignment="CENTER" wrappingWidth="159.62841796875">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <Text layoutX="33.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="90.6708984375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <JFXTextField labelFloat="true" layoutX="33.0" layoutY="118.0" prefHeight="31.0" prefWidth="544.0" promptText="Email" />
+      <JFXTextField labelFloat="true" layoutX="33.0" layoutY="185.0" prefHeight="31.0" prefWidth="544.0" promptText="Password" />
+      <JFXButton buttonType="RAISED" layoutX="152.0" layoutY="246.0" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #1abc9c;" text="Sign In">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="152.0" layoutY="404.0" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #2ecc71;" text="Create an Account">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </JFXButton>
+      <Text layoutX="260.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-- OR --" textAlignment="CENTER" wrappingWidth="90.6708984375">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+   </children>
 </AnchorPane>
