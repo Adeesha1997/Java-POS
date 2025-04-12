@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="498.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.SignupFormController">
+<AnchorPane fx:id="context" prefHeight="498.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.SignupFormController">
    <children>
       <Text layoutX="230.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Robotikka" textAlignment="CENTER" wrappingWidth="159.62841796875">
          <font>
@@ -19,22 +19,22 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <JFXTextField labelFloat="true" layoutX="43.0" layoutY="128.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="43.0" layoutY="128.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
          <font>
             <Font size="20.0" />
          </font>
       </JFXTextField>
-      <JFXTextField labelFloat="true" layoutX="43.0" layoutY="195.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
+      <JFXTextField fx:id="txtPassword" labelFloat="true" layoutX="43.0" layoutY="195.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
          <font>
             <Font size="20.0" />
          </font>
       </JFXTextField>
-      <JFXButton buttonType="RAISED" layoutX="162.0" layoutY="292.0" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #8e44ad;" text="Register" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="162.0" layoutY="292.0" onAction="#btnRegisterOnAction" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #8e44ad;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="162.0" layoutY="399.0" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #34495e;" text="Already Have an Account" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="162.0" layoutY="399.0" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="31.0" prefWidth="306.0" style="-fx-background-color: #34495e;" text="Already Have an Account" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
