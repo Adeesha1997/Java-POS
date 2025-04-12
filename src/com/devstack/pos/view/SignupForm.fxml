@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 
 <AnchorPane fx:id="context" prefHeight="498.0" prefWidth="628.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.SignupFormController">
    <children>
@@ -19,12 +19,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="43.0" layoutY="128.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="txtPassword" labelFloat="true" layoutX="43.0" layoutY="195.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="42.0" layoutY="148.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
          <font>
             <Font size="20.0" />
          </font>
@@ -44,5 +39,12 @@
             <Font size="25.0" />
          </font>
       </Text>
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="43.0" layoutY="217.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXPasswordField>
+      
+
    </children>
 </AnchorPane>

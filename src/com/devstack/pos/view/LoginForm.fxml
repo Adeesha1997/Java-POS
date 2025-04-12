@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -18,11 +19,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="33.0" layoutY="118.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
-         <font>
-            <Font size="20.0" />
-         </font></JFXTextField>
-      <JFXTextField fx:id="txtPassword" labelFloat="true" layoutX="33.0" layoutY="185.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="33.0" layoutY="141.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
          <font>
             <Font size="20.0" />
          </font></JFXTextField>
@@ -41,5 +38,11 @@
             <Font size="25.0" />
          </font>
       </Text>
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="33.0" layoutY="207.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXPasswordField>
+      
    </children>
 </AnchorPane>
