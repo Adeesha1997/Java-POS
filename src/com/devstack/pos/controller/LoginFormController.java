@@ -19,7 +19,7 @@ public class LoginFormController {
     public JFXTextField txtEmail;
     public JFXPasswordField txtPassword;
 
-    public void btnSigningOnAction(ActionEvent actionEvent) throws IOException {
+    public void btnSigningOnAction(ActionEvent actionEvent) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/robotikka", "root", "1234");
@@ -33,7 +33,7 @@ public class LoginFormController {
 
             if (resultSet.next()){
                 if (PasswordManager.checkPassword(txtPassword.getText(), resultSet.getString("password"))){
-                    System.out.println("Completed");
+                 setUi("DashboardForm");
                 }else {
                     new Alert(Alert.AlertType.WARNING, "Check Your Password And Try Again !").show();
                 }
@@ -42,7 +42,7 @@ public class LoginFormController {
             }
 
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException | SQLException | IOException | RuntimeException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
