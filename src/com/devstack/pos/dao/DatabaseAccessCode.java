@@ -10,26 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseAccessCode {
+
     //=====User Management==============
     public static boolean creteUser(String email, String password) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/robotikka", "root", "1234");
 
         String sql = "INSERT INTO user VALUES (?,?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1, email);
         preparedStatement.setString(2, PasswordManager.encryptPassword(password));
 
         return preparedStatement.executeUpdate() > 0;
     }
-
     public static UserDto findUser(String email) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection("jdbc:mySql://localhost:3306/robotikka", "root", "1234");
-
 
         String sql = "SELECT * FROM user WHERE email=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        PreparedStatement preparedStatement =  DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1, email);
 
         ResultSet resultSet = preparedStatement.executeQuery();
