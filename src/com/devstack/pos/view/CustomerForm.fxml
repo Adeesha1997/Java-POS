@@ -58,7 +58,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtSearch" layoutX="20.0" layoutY="197.0" prefHeight="39.0" prefWidth="869.0" text="Search Here">
+      <TextField fx:id="txtSearch" layoutX="20.0" layoutY="197.0" prefHeight="39.0" prefWidth="869.0" promptText="Search Here">
          <font>
             <Font size="18.0" />
          </font>
