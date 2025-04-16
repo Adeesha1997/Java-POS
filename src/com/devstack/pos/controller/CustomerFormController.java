@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 public class CustomerFormController {
 
@@ -52,6 +53,16 @@ public class CustomerFormController {
                 setData(newValue);
             }
         });
+
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchText = newValue;
+            try {
+                loadAllCustomers(searchText);
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
     }
 
     private void setData(CustomerTm newValue) {
@@ -66,7 +77,7 @@ public class CustomerFormController {
     private void loadAllCustomers(String searchText) throws SQLException, ClassNotFoundException {
         ObservableList<CustomerTm> observableList = FXCollections.observableArrayList();
         int counter = 1;
-        for (CustomerDto dto : DatabaseAccessCode.searchCustomer(searchText)
+        for (CustomerDto dto : searchText.length() > 0 ? DatabaseAccessCode.searchCustomer(searchText) : DatabaseAccessCode.findAllCustomer()
         ) {
             Button btn = new Button("Delete");
             CustomerTm tm = new CustomerTm(
@@ -74,6 +85,29 @@ public class CustomerFormController {
             );
             observableList.add(tm);
             counter++;
+
+            btn.setOnAction((e) -> {
+
+                try {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure ?", ButtonType.YES, ButtonType.NO);
+                    Optional<ButtonType> selectedButtonType = alert.showAndWait();
+                    if (selectedButtonType.equals(ButtonType.YES)) {
+                        if (DatabaseAccessCode.deleteCustomer(
+                                dto.getEmail()
+                        )) {
+                            new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted !").show();
+                            loadAllCustomers(searchText);
+                        } else {
+                            new Alert(Alert.AlertType.WARNING, "Try Again !").show();
+                        }
+                    }
+                }catch (SQLException | ClassNotFoundException exception) {
+                    exception.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
+                }
+
+            });
+
         }
 
         tblCustomer.setItems(observableList);
@@ -96,7 +130,7 @@ public class CustomerFormController {
     public void btnSaveUpdateOnAction(ActionEvent actionEvent) {
         try {
 
-            if (btnSaveUpdate.getText().equals("Save Customer")){
+            if (btnSaveUpdate.getText().equals("Save Customer")) {
                 if (DatabaseAccessCode.createCustomer(
                         txtEmail.getText(),
                         txtName.getText(),
@@ -109,7 +143,7 @@ public class CustomerFormController {
                 } else {
                     new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                 }
-            }else {
+            } else {
                 if (DatabaseAccessCode.updateCustomer(
                         txtEmail.getText(),
                         txtName.getText(),
@@ -125,7 +159,6 @@ public class CustomerFormController {
                     new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                 }
             }
-
 
 
         } catch (SQLException | ClassNotFoundException e) {
