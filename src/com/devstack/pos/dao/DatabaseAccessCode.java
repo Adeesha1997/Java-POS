@@ -21,10 +21,11 @@ public class DatabaseAccessCode {
 
         return preparedStatement.executeUpdate() > 0;
     }
+
     public static UserDto findUser(String email) throws ClassNotFoundException, SQLException {
 
         String sql = "SELECT * FROM user WHERE email=?";
-        PreparedStatement preparedStatement =  DbConnection.getInstance().getConnection().prepareStatement(sql);
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1, email);
 
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -110,13 +111,13 @@ public class DatabaseAccessCode {
 
     public static List<CustomerDto> searchCustomer(String searchText) throws ClassNotFoundException, SQLException {
 
-        searchText = "%"+searchText+"%";
+        searchText = "%" + searchText + "%";
 
 
         String sql = "SELECT * FROM customer WHERE email LIKE ? || name LIKE ?";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        preparedStatement.setString(1,searchText);
-        preparedStatement.setString(2,searchText);
+        preparedStatement.setString(1, searchText);
+        preparedStatement.setString(2, searchText);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         List<CustomerDto> dtos = new ArrayList<>();
@@ -131,5 +132,21 @@ public class DatabaseAccessCode {
         return dtos;
     }
     //=====Customer Management==========
+
+    //=====Product Management==========
+    public static int getLastProductId() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT code FROM product ORDER BY code DESC LIMIT 1";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        }
+        return 1;
+    }
+
+    //=====Product Management==========
+
 
 }

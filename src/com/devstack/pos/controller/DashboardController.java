@@ -16,7 +16,9 @@ public class DashboardController {
         setUi("CustomerForm");
     }
 
-    public void btnProductOnAction(ActionEvent actionEvent) {
+    public void btnProductOnAction(ActionEvent actionEvent) throws IOException {
+        //setUi("CustomerForm");
+   setUi("ProductMainForm");
     }
 
     public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
