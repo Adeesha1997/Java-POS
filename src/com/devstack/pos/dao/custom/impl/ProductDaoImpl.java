@@ -12,8 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
+
     @Override
-    public boolean saveProduct(Product product) throws SQLException, ClassNotFoundException {
+    public int getLastProductId() throws SQLException, ClassNotFoundException {
+        String sql = "SELECT code FROM product ORDER BY code DESC LIMIT 1";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return (resultSet.getInt(1)+1);
+        }
+        return 1;
+    }
+
+    @Override
+    public boolean save(Product product) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO product VALUES (?,?)";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, product.getCode());
@@ -23,7 +37,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean updateProduct(Product product) throws SQLException, ClassNotFoundException {
+    public boolean update(Product product) throws SQLException, ClassNotFoundException {
         String sql = "UPDATE product SET description=? WHERE code=?";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1, product.getDescription());
@@ -33,7 +47,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public boolean deleteProduct(int code) throws SQLException, ClassNotFoundException {
+    public boolean delete(Integer code) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM product WHERE code=?";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, code);
@@ -41,7 +55,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Product findProduct(int code) throws SQLException, ClassNotFoundException {
+    public Product find(Integer code) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM product WHERE code=?";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setInt(1, code);
@@ -58,7 +72,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<Product> findAllProduct() throws SQLException, ClassNotFoundException {
+    public List<Product> findAll() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM product";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
 
@@ -72,18 +86,5 @@ public class ProductDaoImpl implements ProductDao {
             ));
         }
         return productList;
-    }
-
-    @Override
-    public int getLastProductId() throws SQLException, ClassNotFoundException {
-        String sql = "SELECT code FROM product ORDER BY code DESC LIMIT 1";
-        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            return (resultSet.getInt(1)+1);
-        }
-        return 1;
     }
 }

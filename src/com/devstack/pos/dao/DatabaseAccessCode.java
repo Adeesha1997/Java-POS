@@ -51,21 +51,21 @@ public class DatabaseAccessCode {
     //=====Customer Management==========
     public boolean createCustomer(String email, String name, String contact, double salary) throws SQLException, ClassNotFoundException {
 
-        return customerDao.saveCustomer(
+        return customerDao.save(
                 new Customer(email, name, contact, salary)
         );
     }
 
     public boolean updateCustomer(String email, String name, String contact, double salary) throws ClassNotFoundException, SQLException {
 
-        return customerDao.updateCustomer(
+        return customerDao.update(
                 new Customer(email, name, contact, salary)
         );
     }
 
     public CustomerDto findCustomer(String email) throws ClassNotFoundException, SQLException {
 
-        Customer customer = customerDao.findCustomer(email);
+        Customer customer = customerDao.find(email);
         if (customer != null) {
             return new CustomerDto(
                     customer.getEmail(),
@@ -79,13 +79,13 @@ public class DatabaseAccessCode {
 
     public boolean deleteCustomer(String email) throws ClassNotFoundException, SQLException {
 
-        return customerDao.deleteCustomer(email);
+        return customerDao.delete(email);
     }
 
     public List<CustomerDto> findAllCustomer() throws ClassNotFoundException, SQLException {
 
         List<CustomerDto> dtos = new ArrayList<>();
-        for (Customer c : customerDao.findAllCustomer()
+        for (Customer c : customerDao.findAll()
         ) {
             dtos.add(new CustomerDto(
                     c.getEmail(),
@@ -124,7 +124,7 @@ public class DatabaseAccessCode {
 
     public boolean createProduct(int code, String description) throws SQLException, ClassNotFoundException {
 
-        return productDao.saveProduct(
+        return productDao.save(
                 new Product(code, description)
         );
     }
