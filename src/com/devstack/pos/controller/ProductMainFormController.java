@@ -23,7 +23,7 @@ public class ProductMainFormController {
 
     private void loadProductId() {
         try {
-            txtProductCode.setText(String.valueOf(DatabaseAccessCode.getLastProductId()));
+            txtProductCode.setText(String.valueOf(new DatabaseAccessCode().getLastProductId()));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
