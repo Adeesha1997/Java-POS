@@ -12,6 +12,7 @@ import com.devstack.pos.dto.dto.CustomerDto;
 import com.devstack.pos.entity.Customer;
 import com.devstack.pos.entity.Product;
 import com.devstack.pos.entity.User;
+import com.devstack.pos.enums.DaoType;
 import com.devstack.pos.util.PasswordManager;
 
 import java.sql.*;
@@ -20,22 +21,22 @@ import java.util.List;
 
 public class DatabaseAccessCode {
 
-    UserDao userDao = new UserDaoImpl();
-    CustomerDao customerDao = new CustomerDaoImpl();
-    ProductDao productDao = new ProductDaoImpl();
+    UserDao userDao = (UserDao) DaoFactory.getInstance().getDao(DaoType.USER);
+    CustomerDao customerDao = (CustomerDao) DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+    ProductDao productDao = (ProductDao) DaoFactory.getInstance().getDao(DaoType.PRODUCT);
 
 
     //=====User Management==============
     public boolean creteUser(String email, String password) throws ClassNotFoundException, SQLException {
 
-        return userDao.saveUser(
+        return userDao.save(
                 new User(email, password)
         );
     }
 
     public UserDto findUser(String email) throws ClassNotFoundException, SQLException {
 
-        User user = userDao.findUser(email);
+        User user = userDao.find(email);
 
         if (user != null) {
             return new UserDto(
