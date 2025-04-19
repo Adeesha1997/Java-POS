@@ -77,7 +77,7 @@ public class CustomerFormController {
     private void loadAllCustomers(String searchText) throws SQLException, ClassNotFoundException {
         ObservableList<CustomerTm> observableList = FXCollections.observableArrayList();
         int counter = 1;
-        for (CustomerDto dto : searchText.length() > 0 ? DatabaseAccessCode.searchCustomer(searchText) : DatabaseAccessCode.findAllCustomer()
+        for (CustomerDto dto : searchText.length() > 0 ? new DatabaseAccessCode().searchCustomer(searchText) : DatabaseAccessCode.findAllCustomer()
         ) {
             Button btn = new Button("Delete");
             CustomerTm tm = new CustomerTm(
@@ -93,7 +93,7 @@ public class CustomerFormController {
                     Optional<ButtonType> selectedButtonType = alert.showAndWait();
                     if (selectedButtonType.get().equals(ButtonType.YES)) {
 
-                        if (DatabaseAccessCode.deleteCustomer(
+                        if (new DatabaseAccessCode().deleteCustomer(
                                 dto.getEmail()
                         )) {
                             new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted !").show();
@@ -102,7 +102,7 @@ public class CustomerFormController {
                             new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                         }
                     }
-                }catch (SQLException | ClassNotFoundException exception) {
+                } catch (SQLException | ClassNotFoundException exception) {
                     exception.printStackTrace();
                     new Alert(Alert.AlertType.ERROR, exception.getMessage()).show();
                 }
@@ -132,7 +132,7 @@ public class CustomerFormController {
         try {
 
             if (btnSaveUpdate.getText().equals("Save Customer")) {
-                if (DatabaseAccessCode.createCustomer(
+                if (new DatabaseAccessCode().createCustomer(
                         txtEmail.getText(),
                         txtName.getText(),
                         txtContact.getText(),
@@ -145,7 +145,7 @@ public class CustomerFormController {
                     new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                 }
             } else {
-                if (DatabaseAccessCode.updateCustomer(
+                if (new DatabaseAccessCode().updateCustomer(
                         txtEmail.getText(),
                         txtName.getText(),
                         txtContact.getText(),

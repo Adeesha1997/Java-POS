@@ -39,7 +39,7 @@ public class ProductMainFormController {
         try {
 
             if (btnSaveUpdate.getText().equals("Save Product")) {
-                if (DatabaseAccessCode.createProduct(
+                if (new DatabaseAccessCode().createProduct(
                         Integer.parseInt(txtProductCode.getText()),
                         txtProductDescription.getText()
                 )) {
@@ -50,7 +50,7 @@ public class ProductMainFormController {
                     new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                 }
             } else {
-                if (DatabaseAccessCode.createProduct(
+                if (new DatabaseAccessCode().createProduct(
                         Integer.parseInt(txtProductCode.getText()),
                         txtProductDescription.getText()
                 )) {
