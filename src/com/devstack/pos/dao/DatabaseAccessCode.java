@@ -21,9 +21,9 @@ import java.util.List;
 
 public class DatabaseAccessCode {
 
-    UserDao userDao = (UserDao) DaoFactory.getInstance().getDao(DaoType.USER);
-    CustomerDao customerDao = (CustomerDao) DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
-    ProductDao productDao = (ProductDao) DaoFactory.getInstance().getDao(DaoType.PRODUCT);
+    UserDao userDao = DaoFactory.getInstance().getDao(DaoType.USER);
+    CustomerDao customerDao =DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+    ProductDao productDao = DaoFactory.getInstance().getDao(DaoType.PRODUCT);
 
 
     //=====User Management==============
