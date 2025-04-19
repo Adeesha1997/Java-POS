@@ -19,7 +19,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="33.0" layoutY="141.0" prefHeight="31.0" prefWidth="544.0" promptText="Email">
+      <JFXTextField fx:id="txtEmail" labelFloat="true" layoutX="33.0" layoutY="141.0" prefHeight="31.0" prefWidth="544.0" promptText="Email" text="Adeesha@gmail.com">
          <font>
             <Font size="20.0" />
          </font></JFXTextField>
@@ -38,7 +38,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="33.0" layoutY="207.0" prefHeight="31.0" prefWidth="544.0" promptText="Password">
+      <JFXPasswordField fx:id="txtPassword" labelFloat="true" layoutX="33.0" layoutY="207.0" prefHeight="31.0" prefWidth="544.0" promptText="Password" text="1234">
          <font>
             <Font size="20.0" />
          </font>
