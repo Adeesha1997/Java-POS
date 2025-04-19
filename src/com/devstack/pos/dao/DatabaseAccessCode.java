@@ -154,7 +154,6 @@ public class DatabaseAccessCode {
 
         return preparedStatement.executeUpdate() > 0;
     }
-
     //=====Product Management==========
 
 
