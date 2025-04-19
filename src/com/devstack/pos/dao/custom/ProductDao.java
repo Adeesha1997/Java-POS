@@ -12,4 +12,7 @@ public interface ProductDao {
     public boolean deleteProduct(int code) throws SQLException, ClassNotFoundException;
     public Product findProduct(int code) throws SQLException, ClassNotFoundException;
     public List<Product> findAllProduct() throws SQLException, ClassNotFoundException;
+
+    //==================================================================================================================
+    public int getLastProductId() throws SQLException, ClassNotFoundException;
 }

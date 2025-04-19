@@ -2,7 +2,6 @@ package com.devstack.pos.dao.custom.impl;
 
 import com.devstack.pos.dao.custom.CustomerDao;
 import com.devstack.pos.db.DbConnection;
-import com.devstack.pos.dto.dto.CustomerDto;
 import com.devstack.pos.entity.Customer;
 
 import java.sql.PreparedStatement;
@@ -66,6 +65,29 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> findAllCustomer() throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM customer";
         PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Customer> customerList = new ArrayList<>();
+        while (resultSet.next()) {
+            customerList.add(new Customer(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getDouble(4)
+            ));
+        }
+        return customerList;
+    }
+
+    @Override
+    public List<Customer> searchCustomer(String searchText) throws SQLException, ClassNotFoundException {
+        searchText = "%" + searchText + "%";
+
+
+        String sql = "SELECT * FROM customer WHERE email LIKE ? || name LIKE ?";
+        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sql);
+        preparedStatement.setString(1, searchText);
+        preparedStatement.setString(2, searchText);
+
         ResultSet resultSet = preparedStatement.executeQuery();
         List<Customer> customerList = new ArrayList<>();
         while (resultSet.next()) {

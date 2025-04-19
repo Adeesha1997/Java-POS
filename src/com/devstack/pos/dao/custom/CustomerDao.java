@@ -12,4 +12,7 @@ public interface CustomerDao {
     public boolean deleteCustomer(String email) throws SQLException, ClassNotFoundException;
     public Customer findCustomer(String email) throws SQLException, ClassNotFoundException;
     public List<Customer> findAllCustomer() throws SQLException, ClassNotFoundException;
+
+    //====================================================================================================================================
+    public List<Customer> searchCustomer(String searchText) throws SQLException, ClassNotFoundException;
 }
