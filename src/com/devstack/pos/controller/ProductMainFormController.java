@@ -1,6 +1,7 @@
 package com.devstack.pos.controller;
 
-import com.devstack.pos.dao.DatabaseAccessCode;
+import com.devstack.pos.bo.custom.impl.ProductBoImpl;
+import com.devstack.pos.dto.ProductDto;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -23,7 +24,7 @@ public class ProductMainFormController {
 
     private void loadProductId() {
         try {
-            txtProductCode.setText(String.valueOf(new DatabaseAccessCode().getLastProductId()));
+            txtProductCode.setText(String.valueOf(new ProductBoImpl().getLastProductId()));
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -39,9 +40,10 @@ public class ProductMainFormController {
         try {
 
             if (btnSaveUpdate.getText().equals("Save Product")) {
-                if (new DatabaseAccessCode().createProduct(
-                        Integer.parseInt(txtProductCode.getText()),
-                        txtProductDescription.getText()
+                if (new ProductBoImpl().saveProduct(
+                        new ProductDto(    Integer.parseInt(txtProductCode.getText()),
+                                txtProductDescription.getText())
+
                 )) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Product Saved !").show();
                     clearFiles();
@@ -50,9 +52,9 @@ public class ProductMainFormController {
                     new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                 }
             } else {
-                if (new DatabaseAccessCode().createProduct(
-                        Integer.parseInt(txtProductCode.getText()),
-                        txtProductDescription.getText()
+                if (new ProductBoImpl().updateProduct(
+                        new ProductDto(    Integer.parseInt(txtProductCode.getText()),
+                                txtProductDescription.getText())
                 )) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Product Updated !").show();
                     clearFiles();

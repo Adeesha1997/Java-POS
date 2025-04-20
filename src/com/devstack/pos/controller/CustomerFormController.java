@@ -1,6 +1,6 @@
 package com.devstack.pos.controller;
 
-import com.devstack.pos.dao.DatabaseAccessCode;
+import com.devstack.pos.bo.custom.impl.CustomerBoImpl;
 import com.devstack.pos.dto.CustomerDto;
 import com.devstack.pos.view.tm.CustomerTm;
 import com.jfoenix.controls.JFXButton;
@@ -77,7 +77,7 @@ public class CustomerFormController {
     private void loadAllCustomers(String searchText) throws SQLException, ClassNotFoundException {
         ObservableList<CustomerTm> observableList = FXCollections.observableArrayList();
         int counter = 1;
-        for (CustomerDto dto : searchText.length() > 0 ? new DatabaseAccessCode().searchCustomer(searchText) : new DatabaseAccessCode().findAllCustomer()
+        for (CustomerDto dto : searchText.length() > 0 ? new CustomerBoImpl().searchCustomer(searchText) : new CustomerBoImpl().findAllCustomer()
         ) {
             Button btn = new Button("Delete");
             CustomerTm tm = new CustomerTm(
@@ -93,7 +93,7 @@ public class CustomerFormController {
                     Optional<ButtonType> selectedButtonType = alert.showAndWait();
                     if (selectedButtonType.get().equals(ButtonType.YES)) {
 
-                        if (new DatabaseAccessCode().deleteCustomer(
+                        if (new CustomerBoImpl().deleteCustomer(
                                 dto.getEmail()
                         )) {
                             new Alert(Alert.AlertType.CONFIRMATION, "Customer Deleted !").show();
@@ -132,24 +132,25 @@ public class CustomerFormController {
         try {
 
             if (btnSaveUpdate.getText().equals("Save Customer")) {
-                if (new DatabaseAccessCode().createCustomer(
-                        txtEmail.getText(),
-                        txtName.getText(),
-                        txtContact.getText(),
-                        Double.parseDouble(txtSalary.getText())
-                )) {
+                if (new CustomerBoImpl().saveCustomer(
+                        new CustomerDto(txtEmail.getText(),
+                                txtName.getText(),
+                                txtContact.getText(),
+                                Double.parseDouble(txtSalary.getText()))
+
+                )){
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer Saved !").show();
                     clearFiles();
                     loadAllCustomers(searchText);
-                } else {
+                } else{
                     new Alert(Alert.AlertType.WARNING, "Try Again !").show();
                 }
             } else {
-                if (new DatabaseAccessCode().updateCustomer(
-                        txtEmail.getText(),
-                        txtName.getText(),
-                        txtContact.getText(),
-                        Double.parseDouble(txtSalary.getText())
+                if (new CustomerBoImpl().updateCustomer(
+                        new CustomerDto(txtEmail.getText(),
+                                txtName.getText(),
+                                txtContact.getText(),
+                                Double.parseDouble(txtSalary.getText()))
                 )) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer Updated !").show();
                     clearFiles();
