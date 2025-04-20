@@ -3,17 +3,12 @@ package com.devstack.pos.dao;
 import com.devstack.pos.dao.custom.CustomerDao;
 import com.devstack.pos.dao.custom.ProductDao;
 import com.devstack.pos.dao.custom.UserDao;
-import com.devstack.pos.dao.custom.impl.CustomerDaoImpl;
-import com.devstack.pos.dao.custom.impl.ProductDaoImpl;
-import com.devstack.pos.dao.custom.impl.UserDaoImpl;
-import com.devstack.pos.db.DbConnection;
 import com.devstack.pos.dto.UserDto;
-import com.devstack.pos.dto.dto.CustomerDto;
+import com.devstack.pos.dto.CustomerDto;
 import com.devstack.pos.entity.Customer;
 import com.devstack.pos.entity.Product;
 import com.devstack.pos.entity.User;
 import com.devstack.pos.enums.DaoType;
-import com.devstack.pos.util.PasswordManager;
 
 import java.sql.*;
 import java.util.ArrayList;
