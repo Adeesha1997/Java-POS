@@ -38,30 +38,30 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXTextField>
-                  <TextArea fx:id="txtProductDescription" layoutX="5.0" layoutY="64.0" prefHeight="94.0" prefWidth="440.0" promptText="Description" />
+                  <TextArea fx:id="txtProductDescription" layoutX="7.0" layoutY="63.0" prefHeight="94.0" prefWidth="440.0" promptText="Description" />
                   <JFXButton fx:id="btnSaveUpdate" buttonType="RAISED" layoutX="315.0" layoutY="166.0" onAction="#btnSaveUpdateOnAction" style="-fx-background-color: #2ecc71;" text="Save Product" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </JFXButton>
                   <TextField layoutX="5.0" layoutY="204.0" prefHeight="31.0" prefWidth="440.0" promptText="Search Here" />
-                  <TableView layoutX="5.0" layoutY="248.0" prefHeight="200.0" prefWidth="440.0">
+                  <TableView fx:id="tbl" layoutX="5.0" layoutY="248.0" prefHeight="200.0" prefWidth="440.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="#" />
-                        <TableColumn prefWidth="75.0" text="Desc" />
-                        <TableColumn prefWidth="154.0" text="Show More" />
-                        <TableColumn prefWidth="154.0" text="Delete" />
+                        <TableColumn fx:id="colProductId" prefWidth="75.0" text="#" />
+                        <TableColumn fx:id="colProductDesc" prefWidth="75.0" text="Desc" />
+                        <TableColumn fx:id="colProductShowMore" prefWidth="154.0" text="Show More" />
+                        <TableColumn fx:id="colProductDelete" prefWidth="154.0" text="Delete" />
                      </columns>
                   </TableView>
                </children>
             </AnchorPane>
             <Separator layoutX="504.0" layoutY="68.0" orientation="VERTICAL" prefHeight="479.0" prefWidth="8.0" />
-            <JFXButton buttonType="RAISED" layoutX="1125.0" layoutY="91.0" style="-fx-background-color: #3498db;" text="New Batch" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="1125.0" layoutY="91.0" onAction="#newBatchOnAction" style="-fx-background-color: #3498db;" text="New Batch" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXTextField labelFloat="true" layoutX="520.0" layoutY="91.0" promptText="Selected Product Code">
+            <JFXTextField fx:id="txtSelectedProId" editable="false" labelFloat="true" layoutX="520.0" layoutY="91.0" promptText="Selected Product Code">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -77,7 +77,7 @@
                   <TableColumn prefWidth="119.0" text="Delete" />
                </columns>
             </TableView>
-            <TextArea layoutX="520.0" layoutY="148.0" prefHeight="94.0" prefWidth="697.0" promptText="Description" />
+            <TextArea fx:id="txtSelectedProDesc" editable="false" layoutX="520.0" layoutY="148.0" prefHeight="94.0" prefWidth="697.0" promptText="Description" />
          </children>
       </AnchorPane>
    </children>

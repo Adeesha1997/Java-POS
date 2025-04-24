@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="context" prefHeight="613.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.NewBatchFormController">
+   <children>
+      <Text fill="#2c3e50" layoutX="18.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Management" wrappingWidth="300.0751953125">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <Separator layoutX="18.0" layoutY="80.0" prefHeight="9.0" prefWidth="708.0" />
+      <JFXButton buttonType="RAISED" layoutX="603.0" layoutY="35.0" onAction="#btnBackToHomeOnAction" style="-fx-background-color: #7f8c8d;" text="Back To Home" textFill="#fcfcfc">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane layoutX="18.0" layoutY="100.0" prefHeight="279.0" prefWidth="255.0" style="-fx-background-color: #7f8c8d;">
+         <children>
+            <ImageView fx:id="barcodeImage" fitHeight="252.0" fitWidth="228.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" />
+         </children>
+      </AnchorPane>
+      <JFXTextField labelFloat="true" layoutX="284.0" layoutY="121.0" prefHeight="31.0" prefWidth="300.0" promptText="Quantity">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField labelFloat="true" layoutX="284.0" layoutY="171.0" prefHeight="31.0" prefWidth="300.0" promptText="Buying Price">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField labelFloat="true" layoutX="284.0" layoutY="224.0" prefHeight="31.0" prefWidth="300.0" promptText="Show Price">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField labelFloat="true" layoutX="284.0" layoutY="271.0" prefHeight="31.0" prefWidth="300.0" promptText="Selling Price">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField labelFloat="true" layoutX="18.0" layoutY="394.0" prefHeight="31.0" prefWidth="255.0" promptText="Product ID">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <TextArea layoutX="18.0" layoutY="441.0" prefHeight="94.0" prefWidth="708.0" promptText="Description" />
+      <RadioButton layoutX="284.0" layoutY="353.0" mnemonicParsing="false" text="Yes">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </RadioButton>
+      <Label layoutX="284.0" layoutY="317.0" text="Discount %">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <RadioButton layoutX="369.0" layoutY="353.0" mnemonicParsing="false" selected="true" text="No">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </RadioButton>
+      <JFXButton buttonType="RAISED" layoutX="628.0" layoutY="394.0" onAction="#btnBackToHomeOnAction" style="-fx-background-color: #34495e;" text="Save Batch" textFill="#fcfcfc">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
