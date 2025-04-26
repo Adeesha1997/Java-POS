@@ -35,6 +35,7 @@ public class ProductMainFormController {
     public TableColumn colProductDelete;
     public JFXTextField txtSelectedProId;
     public TextArea txtSelectedProDesc;
+    public JFXButton btnNewBatch;
     private String searchText = "";
 
     ProductBo bo = BoFactory.getInstance().getBo(BoType.PRODUCT);
@@ -49,14 +50,20 @@ public class ProductMainFormController {
         loadProductId();
         loadAllProducts(searchText);
 
-        tbl.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        tbl.getSelectionModel().selectedItemProperty().addListener((
+                observable,
+                oldValue,
+                newValue) -> {
+
             setData(newValue);
+
         });
     }
 
     private void setData(ProductTm newValue) {
         txtSelectedProId.setText(String.valueOf(newValue.getCode()));
-        txtProductDescription.setText(String.valueOf(newValue.getDescription()));
+        txtSelectedProDesc.setText(newValue.getDescription());
+        btnNewBatch.setDisable(false);
     }
 
 
@@ -140,10 +147,17 @@ public class ProductMainFormController {
     }
 
     public void newBatchOnAction(ActionEvent actionEvent) throws IOException {
-        Stage stage = new Stage();
-        Parent load = FXMLLoader.load(getClass().getResource("../view/NewBatchForm.fxml"));
-        stage.setScene(new Scene(load));
-        stage.show();
-        stage.centerOnScreen();
+        if (!txtSelectedProId.getText().trim().isEmpty()){
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/NewBatchForm.fxml"));
+            Parent parent = fxmlLoader.load();
+            NewBatchFormController controller = fxmlLoader.getController();
+            controller.setProductCode(Integer.parseInt(txtSelectedProId.getText()),txtProductDescription.getText());
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            stage.centerOnScreen();
+        }else{
+            new Alert(Alert.AlertType.WARNING,"Please Select a Valid One !");
+        }
     }
 }

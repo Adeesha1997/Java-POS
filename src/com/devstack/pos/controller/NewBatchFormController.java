@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -25,13 +27,22 @@ public class NewBatchFormController {
 
     public ImageView barcodeImage;
     public AnchorPane context;
+    public JFXTextField txtProductQty;
+    public JFXTextField txtProductBuyingPrice;
+    public JFXTextField txtProductShowPrice;
+    public JFXTextField txtProductSellingPrice;
+    public JFXTextField txtProductCode;
+    public TextArea txtProductDescription;
+    public RadioButton rbtnYes;
+    public RadioButton rbtnNo;
+    String uniqueData = null;
 
     public void initialize() throws WriterException {
         setQRCode();
     }
 
     private void setQRCode() throws WriterException {
-        String uniqueData = QrDataGenerator.generate(25);
+        uniqueData = QrDataGenerator.generate(25);
 
         //--------------Gen QR
 
@@ -44,8 +55,13 @@ public class NewBatchFormController {
                         )
                 );
         //--------------Gen QR
-        Image image = SwingFXUtils.toFXImage(bufferedImage,null);
+        Image image = SwingFXUtils.toFXImage(bufferedImage, null);
         barcodeImage.setImage(image);
+    }
+
+    public void setProductCode(int code, String description) {
+        txtProductCode.setText(String.valueOf(code));
+        txtProductDescription.setText(description);
     }
 
 
@@ -59,5 +75,8 @@ public class NewBatchFormController {
                 new Scene(FXMLLoader.load(getClass().getResource("../view/" + url + ".fxml")))
         );
         stage.centerOnScreen();
+    }
+
+    public void btnSaveOnAction(ActionEvent actionEvent) {
     }
 }
