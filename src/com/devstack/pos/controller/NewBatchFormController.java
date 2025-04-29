@@ -6,6 +6,7 @@ import com.devstack.pos.dto.CustomerDto;
 import com.devstack.pos.dto.ProductDetailDto;
 import com.devstack.pos.enums.BoType;
 import com.devstack.pos.util.QrDataGenerator;
+import com.devstack.pos.view.tm.ProductDetailTm;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -53,7 +54,7 @@ public class NewBatchFormController {
     private final ProductDetailBo productDetailBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAIL);
 
     public void initialize() throws WriterException {
-        setQRCode();
+
 
     }
 
@@ -63,7 +64,7 @@ public class NewBatchFormController {
         //--------------Gen QR
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-         bufferedImage = MatrixToImageWriter
+        bufferedImage = MatrixToImageWriter
                 .toBufferedImage(
                         qrCodeWriter.encode(
                                 uniqueData, BarcodeFormat.QR_CODE, 200, 200
@@ -76,10 +77,39 @@ public class NewBatchFormController {
         barcodeImage.setImage(image);
     }
 
-    public void setDetails(int code, String description, Stage stage) {
+    public void setDetails(int code, String description, Stage stage, boolean state, ProductDetailTm tm) {
+        this.stage = stage;
+
+        if (state) {
+            try {
+                ProductDetailDto productDetails = productDetailBo.findProductDetails(tm.getCode());
+                if (productDetails != null) {
+                    txtProductQty.setText(String.valueOf(productDetails.getQtyOnHand()));
+                    txtProductBuyingPrice.setText(String.valueOf(productDetails.getBuyingPrice()));
+                    txtProductSellingPrice.setText(String.valueOf(productDetails.getSellingPrice()));
+                    txtProductShowPrice.setText(String.valueOf(productDetails.getShowPrice()));
+                    txtProductQty.setText(String.valueOf(productDetails.getQtyOnHand()));
+                    rbtnYes.setSelected(productDetails.isDiscountAvailability());
+
+
+                } else {
+                    stage.close();
+                }
+
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {
+            try {
+                setQRCode();
+            } catch (WriterException e) {
+                throw new RuntimeException(e);
+            }
+        }
         txtProductCode.setText(String.valueOf(code));
         txtProductDescription.setText(description);
-        this.stage = stage;
+
     }
 
 
@@ -106,7 +136,7 @@ public class NewBatchFormController {
         ProductDetailDto dto = new ProductDetailDto(
                 uniqueData, Base64.getEncoder().encodeToString(arr), Integer.parseInt(txtProductQty.getText()),
                 Double.parseDouble(txtProductSellingPrice.getText()), Double.parseDouble(txtProductShowPrice.getText()),
-                Double.parseDouble(txtProductBuyingPrice.getText()), Integer.parseInt(txtProductCode.getText()),rbtnYes.isSelected() ? true : false
+                Double.parseDouble(txtProductBuyingPrice.getText()), Integer.parseInt(txtProductCode.getText()), rbtnYes.isSelected() ? true : false
 
 
         );

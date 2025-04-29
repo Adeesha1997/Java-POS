@@ -63,4 +63,19 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
 
 
     }
+
+    @Override
+    public ProductDetail findProductDetails(String code) throws SQLException, ClassNotFoundException {
+        ResultSet set = CrudUtil.execute("SELECT * FROM product_detail WHERE code=?", code);
+
+        if (set.next()){
+            return new ProductDetail(
+                    set.getString(1), set.getString(2),
+                    set.getInt(3),set.getDouble(4),
+                    set.getDouble(7),set.getDouble(5),
+                    set.getInt(8), set.getBoolean(6)
+            );
+        }
+        return null;
+    }
 }
