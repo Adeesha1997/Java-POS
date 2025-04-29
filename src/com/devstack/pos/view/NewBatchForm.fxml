@@ -56,7 +56,7 @@
          </font>
       </JFXTextField>
       <TextArea fx:id="txtProductDescription" layoutX="18.0" layoutY="441.0" prefHeight="94.0" prefWidth="708.0" promptText="Description" />
-      <RadioButton fx:id="btnYes" layoutX="284.0" layoutY="353.0" mnemonicParsing="false" text="Yes">
+      <RadioButton fx:id="rbtnYes" layoutX="284.0" layoutY="353.0" mnemonicParsing="false" text="Yes">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
