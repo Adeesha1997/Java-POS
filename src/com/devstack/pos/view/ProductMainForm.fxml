@@ -66,15 +66,15 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXTextField>
-            <TableView layoutX="525.0" layoutY="339.0" prefHeight="200.0" prefWidth="697.0">
+            <TableView fx:id="tblDetail" layoutX="525.0" layoutY="339.0" prefHeight="200.0" prefWidth="697.0">
                <columns>
-                  <TableColumn prefWidth="43.0" text="#" />
-                  <TableColumn prefWidth="64.0" text="Qty" />
-                  <TableColumn prefWidth="106.0" text="Selling Price" />
-                  <TableColumn prefWidth="103.0" text="Buying Price" />
-                  <TableColumn prefWidth="131.0" text="Dis. Availability" />
-                  <TableColumn minWidth="0.0" prefWidth="130.0" text="Show Price" />
-                  <TableColumn prefWidth="119.0" text="Delete" />
+                  <TableColumn fx:id="colPDId" prefWidth="43.0" text="#" />
+                  <TableColumn fx:id="colPDQty" prefWidth="64.0" text="Qty" />
+                  <TableColumn fx:id="colPDSellingPrice" prefWidth="106.0" text="Selling Price" />
+                  <TableColumn fx:id="colPDBuyingPrice" prefWidth="103.0" text="Buying Price" />
+                  <TableColumn fx:id="colPDDisAvailability" prefWidth="131.0" text="Dis. Availability" />
+                  <TableColumn fx:id="colPDShowPrice" minWidth="0.0" prefWidth="130.0" text="Show Price" />
+                  <TableColumn fx:id="colPDDelete" prefWidth="119.0" text="Delete" />
                </columns>
             </TableView>
             <TextArea fx:id="txtSelectedProDesc" editable="false" layoutX="520.0" layoutY="148.0" prefHeight="94.0" prefWidth="697.0" promptText="Description" />
