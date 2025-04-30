@@ -27,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -91,7 +92,10 @@ public class NewBatchFormController {
                     txtProductQty.setText(String.valueOf(productDetails.getQtyOnHand()));
                     rbtnYes.setSelected(productDetails.isDiscountAvailability());
 
-
+                    byte[] data = Base64.getDecoder().decode(productDetails.getBarcode());
+                    barcodeImage.setImage(
+                            new Image(new ByteArrayInputStream(data))
+                    );
                 } else {
                     stage.close();
                 }

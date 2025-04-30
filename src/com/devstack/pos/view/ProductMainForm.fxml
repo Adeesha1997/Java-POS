@@ -77,7 +77,7 @@
                   <TableColumn fx:id="colPDDelete" prefWidth="119.0" text="Delete" />
                </columns>
             </TableView>
-            <TextArea fx:id="txtSelectedProDesc" editable="false" layoutX="520.0" layoutY="148.0" prefHeight="94.0" prefWidth="697.0" promptText="Description" />
+            <TextArea fx:id="txtSelectedProDesc" editable="false" layoutX="519.0" layoutY="148.0" prefHeight="94.0" prefWidth="697.0" promptText="Description" />
          </children>
       </AnchorPane>
    </children>
