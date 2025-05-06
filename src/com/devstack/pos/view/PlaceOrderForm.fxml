@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="context" prefHeight="726.0" prefWidth="1158.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.devstack.pos.controller.PlaceOrderFormController">
+   <children>
+      <Text fill="#2c3e50" layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place Order" wrappingWidth="300.0751953125">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Text>
+      <Separator layoutX="14.0" layoutY="56.0" prefHeight="8.0" prefWidth="943.0" />
+      <JFXRadioButton layoutX="20.0" layoutY="75.0" selected="true" text="Manual Mode">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="mode" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton layoutX="196.0" layoutY="75.0" text="Manual Mode" toggleGroup="$mode">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+      <Text fill="#2c3e50" layoutX="14.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Details" wrappingWidth="300.0751953125">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txtSelectedProId" labelFloat="true" layoutX="14.0" layoutY="170.0" promptText="Email">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId1" editable="false" labelFloat="true" layoutX="232.0" layoutY="170.0" promptText="Name">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId11" editable="false" labelFloat="true" layoutX="445.0" layoutY="170.0" promptText="Contact">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId111" editable="false" labelFloat="true" layoutX="657.0" layoutY="170.0" promptText="Salary">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btnSaveUpdate" buttonType="RAISED" layoutX="990.0" layoutY="72.0" onAction="#btnAddNewCustomerOnAction" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #2ecc71;" text="+ New Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <Separator layoutX="207.0" layoutY="170.0" orientation="VERTICAL" prefHeight="31.0" prefWidth="6.0" />
+      <Separator layoutX="20.0" layoutY="153.0" prefHeight="8.0" prefWidth="943.0" />
+      <Hyperlink layoutX="14.0" layoutY="213.0" text="Show Loyality Card Information" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
+      <Label layoutX="165.0" layoutY="135.0" prefHeight="17.0" prefWidth="134.0" text="(GOLD MEMBER)" textFill="#215711">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Text fill="#2c3e50" layoutX="17.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Details" wrappingWidth="300.0751953125">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Separator layoutX="16.0" layoutY="299.0" prefHeight="8.0" prefWidth="943.0" />
+      <JFXTextField fx:id="txtSelectedProId2" labelFloat="true" layoutX="173.0" layoutY="261.0" promptText="Barcode ">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton buttonType="RAISED" layoutX="827.0" layoutY="72.0" onAction="#btnAddNewProductOnAction" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #e67e22;" text="+ New Product" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtSelectedProId21" editable="false" labelFloat="true" layoutX="14.0" layoutY="327.0" prefHeight="31.0" prefWidth="250.0" promptText="Description">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId211" editable="false" labelFloat="true" layoutX="279.0" layoutY="327.0" prefHeight="31.0" prefWidth="134.0" promptText="Selling Price">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId2111" editable="false" labelFloat="true" layoutX="425.0" layoutY="327.0" prefHeight="31.0" prefWidth="134.0" promptText="Discount">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId21111" editable="false" labelFloat="true" layoutX="573.0" layoutY="327.0" prefHeight="31.0" prefWidth="134.0" promptText="Show Price">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId211111" editable="false" labelFloat="true" layoutX="718.0" layoutY="327.0" prefHeight="31.0" prefWidth="134.0" promptText="Qty On Hand">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="14.0" layoutY="371.0" prefHeight="17.0" prefWidth="174.0" text="(DISCOUNT AVAILABLE)" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtSelectedProId2111111" editable="false" labelFloat="true" layoutX="870.0" layoutY="327.0" prefHeight="31.0" prefWidth="134.0" promptText="Buying Price">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtSelectedProId21111111" labelFloat="true" layoutX="1015.0" layoutY="327.0" prefHeight="31.0" prefWidth="134.0" promptText="QTY" style="-fx-border-color: #c0392b;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="tblDetail" layoutX="16.0" layoutY="400.0" prefHeight="222.0" prefWidth="1133.0">
+         <columns>
+            <TableColumn fx:id="colPDId" prefWidth="43.0" text="#" />
+            <TableColumn fx:id="colPDQty" prefWidth="300.0" text="Descripption" />
+            <TableColumn fx:id="colPDSellingPrice" prefWidth="117.0" text="Selling Price" />
+            <TableColumn fx:id="colPDBuyingPrice" prefWidth="112.0" text="Discount" />
+            <TableColumn fx:id="colPDDisAvailability" prefWidth="122.0" text="Show Price" />
+            <TableColumn fx:id="colPDShowPrice" minWidth="0.0" prefWidth="125.0" text="Show Price" />
+            <TableColumn fx:id="colPDDelete" prefWidth="159.0" text="Total Price" />
+            <TableColumn fx:id="colPDDelete1" prefWidth="154.0" text="Operation" />
+         </columns>
+      </TableView>
+      <JFXButton buttonType="RAISED" layoutX="994.0" layoutY="637.0" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #c0392b;" text="Complete Order" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <Text fill="RED" layoutX="16.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" wrappingWidth="126.0751953125">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="169.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000/=" wrappingWidth="126.0751953125">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <JFXButton buttonType="RAISED" layoutX="983.0" layoutY="15.0" onAction="#btnBackToHomeOnAction" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #7f8c8d;" text="Back To Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
+</AnchorPane>
