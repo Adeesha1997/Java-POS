@@ -53,7 +53,7 @@ public class PlaceOrderFormController {
     public TableColumn colOperation;
 
 
-    public void initialize(){
+    public void initialize() {
         colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colSellingPrice.setCellValueFactory(new PropertyValueFactory<>("sellingPrice"));
@@ -63,6 +63,7 @@ public class PlaceOrderFormController {
         colTotalPrice.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
         colOperation.setCellValueFactory(new PropertyValueFactory<>("btn"));
     }
+
     public void btnAddNewCustomerOnAction(ActionEvent actionEvent) throws IOException {
         setUi("CustomerForm", true);
     }
@@ -151,25 +152,49 @@ public class PlaceOrderFormController {
     }
 
     ObservableList<CartTm> tms = FXCollections.observableArrayList();
+
     public void addToCartOnAction(ActionEvent actionEvent) {
 
 
         int qty = Integer.parseInt(txtQty.getText());
         double sellingPrice = Double.parseDouble(txtSelllingPrice.getText());
         double totalCost = qty * sellingPrice;
-        Button btn = new Button("Remove");
 
-        CartTm tm = new CartTm(
-                txtBarcode.getText(),
-                txtDescription.getText(),
-                sellingPrice,
-                Double.parseDouble(txtDiscount.getText()),
-                Double.parseDouble(txtShowPrice.getText()),
-                qty,
-                totalCost,
-                btn);
+        CartTm selectedCartTm = isExists(txtBarcode.getText());
+        if (selectedCartTm!=null){
+            selectedCartTm.setQty(qty+selectedCartTm.getQty());
+            selectedCartTm.setTotalCost(qty+selectedCartTm.getTotalCost());
+            tblCart.refresh();
+        }else {
+            Button btn = new Button("Remove");
 
-        tms.add(tm);
-tblCart.setItems(tms);
+            CartTm tm = new CartTm(
+                    txtBarcode.getText(),
+                    txtDescription.getText(),
+                    sellingPrice,
+                    Double.parseDouble(txtDiscount.getText()),
+                    Double.parseDouble(txtShowPrice.getText()),
+                    qty,
+                    totalCost,
+                    btn);
+            tms.add(tm);
+            tblCart.setItems(tms);
+        }
+
+
+
     }
+
+
+    private  CartTm isExists(String code){
+        for (CartTm tm:tms
+             ) {
+            if (tm.getCode().equals(code)){
+                return tm;
+            }
+
+        }
+        return null;
+    }
+
 }
