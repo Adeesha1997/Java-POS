@@ -158,7 +158,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="169.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000/=" wrappingWidth="126.0751953125">
+      <Text fx:id="lblTotalCost" fill="RED" layoutX="169.0" layoutY="659.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1000/=" wrappingWidth="126.0751953125">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

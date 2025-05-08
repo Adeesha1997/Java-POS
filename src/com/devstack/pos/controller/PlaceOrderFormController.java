@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class PlaceOrderFormController {
     public TableColumn colQty;
     public TableColumn colTotalPrice;
     public TableColumn colOperation;
+    public Text lblTotalCost;
 
 
     public void initialize() {
@@ -177,8 +179,16 @@ public class PlaceOrderFormController {
                     qty,
                     totalCost,
                     btn);
+
+            btn.setOnAction((e)->{
+                tms.remove(tm);
+                tblCart.refresh();
+                setTotal();
+            });
+
             tms.add(tm);
             tblCart.setItems(tms);
+            setTotal();
         }
 
 
@@ -195,6 +205,15 @@ public class PlaceOrderFormController {
 
         }
         return null;
+    }
+
+    private void setTotal(){
+        double total = 0;
+        for (CartTm tm:tms
+             ) {
+            total+=tm.getTotalCost();
+        }
+        lblTotalCost.setText(total+"/=");
     }
 
 }
