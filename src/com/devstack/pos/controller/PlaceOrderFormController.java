@@ -115,6 +115,8 @@ public class PlaceOrderFormController {
                 txtQtyOnHand.setText(String.valueOf(p.getDto().getQtyOnHand()));
                 txtBuyingPrice.setText(String.valueOf(p.getDto().getSellingPrice()));
 
+                txtQty.requestFocus();
+
             }else {
 
                 new Alert(Alert.AlertType.WARNING, "Can't Find the Product !").show();
