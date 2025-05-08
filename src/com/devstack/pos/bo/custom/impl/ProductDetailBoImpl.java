@@ -4,6 +4,7 @@ import com.devstack.pos.bo.custom.ProductDetailBo;
 import com.devstack.pos.dao.DaoFactory;
 import com.devstack.pos.dao.custom.ProductDetailDao;
 import com.devstack.pos.dto.ProductDetailDto;
+import com.devstack.pos.dto.ProductDetailJoinDto;
 import com.devstack.pos.dto.ProductDto;
 import com.devstack.pos.entity.ProductDetail;
 import com.devstack.pos.enums.DaoType;
@@ -70,6 +71,11 @@ public class ProductDetailBoImpl implements ProductDetailBo {
             );
         }
         return null;
+    }
+
+    @Override
+    public ProductDetailJoinDto findProductJoinDetails(String code) throws SQLException, ClassNotFoundException {
+      return dao.findProductDetailJoin(code);
     }
 
 }

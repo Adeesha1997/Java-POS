@@ -3,6 +3,7 @@ package com.devstack.pos.dao.custom.impl;
 import com.devstack.pos.dao.CrudUtil;
 import com.devstack.pos.dao.custom.ProductDetailDao;
 import com.devstack.pos.dto.ProductDetailDto;
+import com.devstack.pos.dto.ProductDetailJoinDto;
 import com.devstack.pos.entity.ProductDetail;
 
 import java.sql.ResultSet;
@@ -74,6 +75,25 @@ public class ProductDetailDaoImpl implements ProductDetailDao {
                     set.getInt(3),set.getDouble(4),
                     set.getDouble(7),set.getDouble(5),
                     set.getInt(8), set.getBoolean(6)
+            );
+        }
+        return null;
+    }
+
+    @Override
+    public ProductDetailJoinDto findProductDetailJoin(String code) throws SQLException, ClassNotFoundException {
+        ResultSet set = CrudUtil.execute("SELECT * FROM product_detail pd JOIN  product p ON pd.code = ? AND pd.product_code =p.code", code);
+
+        if (set.next()){
+            return new ProductDetailJoinDto(
+                    set.getInt(9),
+                    set.getString(10),
+                   new ProductDetailDto(
+                           set.getString(1), set.getString(2),
+                           set.getInt(3),set.getDouble(4),
+                           set.getDouble(7),set.getDouble(5),
+                           set.getInt(8), set.getBoolean(6)
+                   )
             );
         }
         return null;
