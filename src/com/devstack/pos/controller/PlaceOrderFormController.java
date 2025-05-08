@@ -163,11 +163,11 @@ public class PlaceOrderFormController {
         double totalCost = qty * sellingPrice;
 
         CartTm selectedCartTm = isExists(txtBarcode.getText());
-        if (selectedCartTm!=null){
-            selectedCartTm.setQty(qty+selectedCartTm.getQty());
-            selectedCartTm.setTotalCost(qty+selectedCartTm.getTotalCost());
+        if (selectedCartTm != null) {
+            selectedCartTm.setQty(qty + selectedCartTm.getQty());
+            selectedCartTm.setTotalCost(qty + selectedCartTm.getTotalCost());
             tblCart.refresh();
-        }else {
+        } else {
             Button btn = new Button("Remove");
 
             CartTm tm = new CartTm(
@@ -180,26 +180,39 @@ public class PlaceOrderFormController {
                     totalCost,
                     btn);
 
-            btn.setOnAction((e)->{
+            btn.setOnAction((e) -> {
                 tms.remove(tm);
                 tblCart.refresh();
                 setTotal();
             });
 
             tms.add(tm);
+            clear();
             tblCart.setItems(tms);
             setTotal();
         }
 
 
+    }
+
+    private void clear() {
+        txtBarcode.clear();
+        txtDescription.clear();
+        txtSelllingPrice.clear();
+        txtDiscount.clear();
+        txtShowPrice.clear();
+        txtQtyOnHand.clear();
+        txtBuyingPrice.clear();
+        txtQty.clear();
+        txtBarcode.requestFocus();
 
     }
 
 
-    private  CartTm isExists(String code){
-        for (CartTm tm:tms
-             ) {
-            if (tm.getCode().equals(code)){
+    private CartTm isExists(String code) {
+        for (CartTm tm : tms
+        ) {
+            if (tm.getCode().equals(code)) {
                 return tm;
             }
 
@@ -207,13 +220,13 @@ public class PlaceOrderFormController {
         return null;
     }
 
-    private void setTotal(){
+    private void setTotal() {
         double total = 0;
-        for (CartTm tm:tms
-             ) {
-            total+=tm.getTotalCost();
+        for (CartTm tm : tms
+        ) {
+            total += tm.getTotalCost();
         }
-        lblTotalCost.setText(total+"/=");
+        lblTotalCost.setText(total + "/=");
     }
 
 }
