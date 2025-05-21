@@ -1,7 +1,9 @@
 package com.devstack.pos.bo;
 
+import com.devstack.pos.bo.custom.OrderDetailBo;
 import com.devstack.pos.bo.custom.impl.*;
 
+import com.devstack.pos.dao.custom.impl.OrderDetailDaoImpl;
 import com.devstack.pos.enums.BoType;
 
 
@@ -26,6 +28,8 @@ public class BoFactory {
                 return (T) new ProductDetailBoImpl();
             case ITEM_DETAIL:
                 return (T) new ItemDetailBoImpl();
+            case ORDER_DETAIL:
+                return (T) new OrderDetailBoImpl();
             default:
                 return null;
 

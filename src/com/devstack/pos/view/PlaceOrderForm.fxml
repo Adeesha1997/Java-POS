@@ -148,7 +148,7 @@
             <TableColumn fx:id="colOperation" prefWidth="154.0" text="Operation" />
          </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="994.0" layoutY="637.0" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #c0392b;" text="Complete Order" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="994.0" layoutY="637.0" onAction="#btnCompleteOrderOnAction" prefHeight="31.0" prefWidth="156.0" style="-fx-background-color: #c0392b;" text="Complete Order" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
