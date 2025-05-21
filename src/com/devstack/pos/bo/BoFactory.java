@@ -30,6 +30,8 @@ public class BoFactory {
                 return (T) new ItemDetailBoImpl();
             case ORDER_DETAIL:
                 return (T) new OrderDetailBoImpl();
+            case LOYALTY_CARD:
+                return (T) new LoyaltyCardBoImpl();
             default:
                 return null;
 

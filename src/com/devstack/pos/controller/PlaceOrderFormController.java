@@ -2,15 +2,19 @@ package com.devstack.pos.controller;
 
 import com.devstack.pos.bo.BoFactory;
 import com.devstack.pos.bo.custom.CustomerBo;
+import com.devstack.pos.bo.custom.LoyaltyCardBo;
 import com.devstack.pos.bo.custom.OrderDetailBo;
 import com.devstack.pos.bo.custom.ProductDetailBo;
-import com.devstack.pos.dto.CustomerDto;
-import com.devstack.pos.dto.ItemDetailDto;
-import com.devstack.pos.dto.OrderDetailDto;
-import com.devstack.pos.dto.ProductDetailJoinDto;
+import com.devstack.pos.dto.*;
 import com.devstack.pos.enums.BoType;
+import com.devstack.pos.enums.CardType;
+import com.devstack.pos.util.QrDataGenerator;
 import com.devstack.pos.util.UserSessionData;
 import com.devstack.pos.view.tm.CartTm;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.qrcode.QRCodeWriter;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,9 +27,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Random;
 
@@ -51,6 +58,7 @@ public class PlaceOrderFormController {
     private final CustomerBo bo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
     private final ProductDetailBo productDetailBo = BoFactory.getInstance().getBo(BoType.PRODUCT_DETAIL);
     private final OrderDetailBo orderDetailBo = BoFactory.getInstance().getBo(BoType.ORDER_DETAIL);
+    private final LoyaltyCardBo loyaltyCardBo = BoFactory.getInstance().getBo(BoType.LOYALTY_CARD);
     public TableView<CartTm> tblCart;
     public TableColumn colCode;
     public TableColumn colDescription;
@@ -110,7 +118,7 @@ public class PlaceOrderFormController {
             if (customer != null) {
                 txtName.setText(customer.getName());
                 txtContact.setText(customer.getContact());
-                txtSalary.setText(String.valueOf(customer.getName()));
+                txtSalary.setText(String.valueOf(customer.getSalary()));
 
                 fetchLoyaltyCardData(txtEmail.getText());
             } else {
@@ -131,6 +139,60 @@ public class PlaceOrderFormController {
     }
 
     public void newLoyaltyOnAction(ActionEvent actionEvent) {
+        try {
+            double salary = Double.parseDouble(txtSalary.getText());
+            CardType type = CardType.SILVER;
+            if (salary >= 100000) {
+                type = CardType.PLATINUM;
+            } else if (salary >= 50000) {
+                type = CardType.GOLD;
+            }else {
+                type = CardType.SILVER;
+            }
+
+
+            String uniqueData = QrDataGenerator.generate(25);
+            //--------------Gen QR
+
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BufferedImage bufferedImage = MatrixToImageWriter
+                    .toBufferedImage(
+                            qrCodeWriter.encode(
+                                    uniqueData, BarcodeFormat.QR_CODE, 200, 200
+
+                            )
+                    );
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            javax.imageio.ImageIO.write(bufferedImage, "png", baos);
+            byte[] arr = baos.toByteArray();
+
+            if (urlNewLoyalty.getText().equals("+ New Loyalty")) {
+                boolean isLoyaltyCardAssign = loyaltyCardBo.saveLoyaltyData(
+
+                        new LoyaltyCardDto(new Random().nextInt(1001), type, Base64.getEncoder().encodeToString(arr), txtEmail.getText())
+                );
+
+                if (isLoyaltyCardAssign){
+                    new Alert(Alert.AlertType.CONFIRMATION, "Data Saved!").show();
+                    urlNewLoyalty.setText("Show Loyalty Card Info");
+                }else {
+                    new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+                }
+
+            } else {
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+        } catch (WriterException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     public void lodeProductOnAction(ActionEvent actionEvent) {
@@ -240,13 +302,13 @@ public class PlaceOrderFormController {
     public void btnCompleteOrderOnAction(ActionEvent actionEvent) {
         ArrayList<ItemDetailDto> dtoList = new ArrayList<>();
         double discount = 0;
-        for (CartTm tm:tms
-             ) {
+        for (CartTm tm : tms
+        ) {
             dtoList.add(new ItemDetailDto(
-                    tm.getCode(),tm.getQty(), tm.getDiscount(), tm.getTotalCost()
+                    tm.getCode(), tm.getQty(), tm.getDiscount(), tm.getTotalCost()
             ));
 
-            discount+=tm.getDiscount();
+            discount += tm.getDiscount();
         }
 
         OrderDetailDto dto = new OrderDetailDto(
@@ -257,16 +319,16 @@ public class PlaceOrderFormController {
                 0,
                 UserSessionData.email,
                 dtoList
-                );
+        );
 
         try {
-            if(orderDetailBo.makeOrder(dto)){
+            if (orderDetailBo.makeOrder(dto)) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
                 clearFields();
-            }else{
+            } else {
                 new Alert(Alert.AlertType.CONFIRMATION, "Try Again!").show();
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.CONFIRMATION, "Try Again!").show();
         }
